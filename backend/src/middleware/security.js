@@ -6,6 +6,7 @@
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const compression = require('compression');
+const cors = require('cors');
 
 /**
  * General rate limiter
@@ -243,6 +244,9 @@ const securityHeaders = (req, res, next) => {
  * Setup security middleware for the app
  */
 const setupSecurity = (app) => {
+    // CORS middleware
+    app.use(cors(corsOptions));
+    
     // Compression middleware
     app.use(compression());
     

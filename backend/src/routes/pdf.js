@@ -4,7 +4,7 @@
  */
 
 const express = require('express');
-const { query, body } = require('express-validator');
+const { query, body, param } = require('express-validator');
 const { authenticateToken, requireRole } = require('../middleware/auth');
 const { validate } = require('../middleware/validation');
 const {
@@ -27,7 +27,7 @@ router.use(requireRole('admin'));
  */
 router.get('/report/:id',
     validate([
-        body('id')
+        param('id')
             .trim()
             .notEmpty()
             .withMessage('Form ID is required')
