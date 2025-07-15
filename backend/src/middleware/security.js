@@ -239,7 +239,34 @@ const securityHeaders = (req, res, next) => {
     next();
 };
 
+/**
+ * Setup security middleware for the app
+ */
+const setupSecurity = (app) => {
+    // Compression middleware
+    app.use(compression());
+    
+    // Security headers
+    app.use(helmetConfig);
+    app.use(securityHeaders);
+    
+    // Request size limiter
+    app.use(requestSizeLimiter);
+    
+    // Request sanitization
+    app.use(sanitizeRequest);
+    
+    // Request logging in development
+    if (process.env.NODE_ENV === 'development') {
+        app.use(requestLogger);
+    }
+    
+    // General rate limiting
+    app.use(generalLimiter);
+};
+
 module.exports = {
+    setupSecurity,
     generalLimiter,
     authLimiter,
     formSubmissionLimiter,
