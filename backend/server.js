@@ -14,7 +14,7 @@ const logger = require('./src/utils/logger');
 
 // Import middleware
 const { setupSecurity } = require('./src/middleware/security');
-const { errorHandler, notFoundHandler } = require('./src/middleware/error');
+const { errorHandler, notFound } = require('./src/middleware/error');
 
 // Import routes
 const apiRoutes = require('./src/routes');
@@ -87,7 +87,7 @@ const setupRoutes = () => {
     }
 
     // 404 handler for API routes
-    app.use('/api/*', notFoundHandler);
+    app.use('/api/*', notFound);
     
     // Global error handler
     app.use(errorHandler);
