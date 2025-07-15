@@ -5,7 +5,7 @@
 
 const express = require('express');
 const { query, body } = require('express-validator');
-const { authenticate, authorize } = require('../middleware/auth');
+const { authenticateToken, requireRole } = require('../middleware/auth');
 const { validate } = require('../middleware/validation');
 const {
     generateSingleReportPDF,
@@ -19,8 +19,8 @@ const { APIError, asyncHandler } = require('../middleware/error');
 const router = express.Router();
 
 // All PDF routes require authentication and admin role
-router.use(authenticate);
-router.use(authorize(['admin']));
+router.use(authenticateToken);
+router.use(requireRole('admin'));
 
 /**
  * Generate single report PDF
