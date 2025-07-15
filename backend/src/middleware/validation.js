@@ -290,7 +290,15 @@ const validateFileUpload = [
     handleValidationErrors
 ];
 
+/**
+ * Generic validation wrapper
+ */
+const validate = (validationRules) => {
+    return [...validationRules, handleValidationErrors];
+};
+
 module.exports = {
+    validate,
     handleValidationErrors,
     validateUser,
     validateLogin,
