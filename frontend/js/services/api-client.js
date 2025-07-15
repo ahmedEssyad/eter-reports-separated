@@ -108,7 +108,7 @@ class ETERApiClient {
      */
     async submitForm(formData) {
         try {
-            return await this.request('/forms', {
+            return await this.request('/forms/submit', {
                 method: 'POST',
                 body: JSON.stringify(formData)
             });
