@@ -50,6 +50,11 @@ class ETERApiClient {
             const data = await response.json();
             
             if (!response.ok) {
+                // Enhanced error handling for validation errors
+                if (data.errors && Array.isArray(data.errors)) {
+                    const errorMessages = data.errors.map(err => `${err.field}: ${err.message}`);
+                    throw new Error(`Validation errors: ${errorMessages.join(', ')}`);
+                }
                 throw new Error(data.message || `HTTP ${response.status}: ${response.statusText}`);
             }
             

@@ -128,8 +128,19 @@ class ETEREmployeeForm {
     }
 
     collectFormData() {
+        const signatures = signaturePad.getSignatures();
+        const vehicles = this.vehicleTable.getVehiclesData();
+        
+        // Fix vehicle data format for backend validation
+        const formattedVehicles = vehicles.map(vehicle => ({
+            matricule: vehicle.matricule,
+            chauffeur: vehicle.chauffeur,
+            heureRevif: vehicle.heureRevif || '',
+            quantiteLivree: parseFloat(vehicle.quantiteLivree) || 0,
+            lieuComptage: vehicle.lieuComptage || ''
+        }));
+        
         const formData = {
-            id: this.generateUniqueId(),
             entree: document.getElementById('entree').value.trim(),
             origine: document.getElementById('origine').value.trim(),
             depot: document.getElementById('depot').value.trim(),
@@ -140,9 +151,9 @@ class ETEREmployeeForm {
             sortieGasoil: parseFloat(document.getElementById('sortieGasoil').value) || 0,
             debutIndex: parseFloat(document.getElementById('debutIndex').value) || 0,
             finIndex: parseFloat(document.getElementById('finIndex').value) || 0,
-            vehicles: this.vehicleTable.getVehiclesData(),
-            ...signaturePad.getSignatures(),
-            timestamp: new Date().toISOString()
+            vehicles: formattedVehicles,
+            signatureResponsable: signatures.responsable || '',
+            signatureChef: signatures.chef || ''
         };
 
         return formData;
