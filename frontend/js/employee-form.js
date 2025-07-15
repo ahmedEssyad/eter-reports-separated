@@ -104,7 +104,7 @@ class ETEREmployeeForm {
         });
 
         // Validate vehicles
-        const vehicles = this.vehicleTable.getVehicles();
+        const vehicles = this.vehicleTable.getVehiclesData();
         if (vehicles.length === 0) {
             this.showToast('Au moins un véhicule doit être ajouté', 'warning');
             isValid = false;
@@ -159,8 +159,7 @@ class ETEREmployeeForm {
         signaturePad.reset();
         
         // Reset vehicle table
-        this.vehicleTable.clear();
-        this.addVehicle();
+        this.vehicleTable.clearTable();
         
         // Reset default values
         this.setDefaultValues();
