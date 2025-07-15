@@ -17,7 +17,7 @@ const {
     updateUser,
     deleteUser
 } = require('../controllers/authController');
-const { authenticate, authorize } = require('../middleware/auth');
+const { authenticateToken, requireRole } = require('../middleware/auth');
 const { validate } = require('../middleware/validation');
 
 const router = express.Router();
@@ -39,7 +39,7 @@ router.post('/login',
 );
 
 // Protected routes
-router.use(authenticate);
+router.use(authenticateToken);
 
 router.get('/verify', verifyToken);
 router.post('/logout', logout);
@@ -71,7 +71,7 @@ router.put('/change-password',
 );
 
 // Admin only routes
-router.use(authorize(['admin']));
+router.use(requireRole('admin'));
 
 router.get('/users', getAllUsers);
 
