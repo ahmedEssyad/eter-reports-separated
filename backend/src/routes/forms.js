@@ -15,7 +15,7 @@ const {
     getFormsByDateRange,
     bulkUpdateForms
 } = require('../controllers/formController');
-const { authenticate, authorize } = require('../middleware/auth');
+const { authenticateToken, requireRole } = require('../middleware/auth');
 const { validate } = require('../middleware/validation');
 
 const router = express.Router();
@@ -119,10 +119,10 @@ router.post('/submit',
 );
 
 // Protected routes - require authentication
-router.use(authenticate);
+router.use(authenticateToken);
 
 // Admin routes
-router.use(authorize(['admin']));
+router.use(requireRole('admin'));
 
 router.get('/',
     validate([
