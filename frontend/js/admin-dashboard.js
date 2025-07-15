@@ -11,7 +11,7 @@ class AdminDashboard {
         this.reports = [];
         this.filteredReports = [];
         this.selectedReports = new Set();
-        this.apiClient = new ETERApiClient();
+        this.apiClient = window.apiClient || new ETERApiClient();
         
         this.init();
     }
@@ -24,18 +24,21 @@ class AdminDashboard {
     }
     
     async checkAuth() {
-        const token = localStorage.getItem('adminToken');
-        const expiry = localStorage.getItem('tokenExpiry');
+        const token = localStorage.getItem('eter_auth_token');
         
-        if (!token || !expiry || new Date().getTime() > parseInt(expiry)) {
+        if (!token) {
             window.location.href = './login.html';
             return;
         }
         
         try {
             const response = await this.apiClient.verifyToken();
-            const userData = JSON.parse(localStorage.getItem('adminUser') || '{}');
-            document.getElementById('welcomeUser').textContent = `Bienvenue, ${userData.name || 'Admin'}`;
+            if (response && response.success) {
+                const userData = JSON.parse(localStorage.getItem('eter_user') || '{}');
+                document.getElementById('welcomeUser').textContent = `Bienvenue, ${userData.name || userData.username || 'Admin'}`;
+            } else {
+                throw new Error('Token verification failed');
+            }
         } catch (error) {
             console.error('Auth error:', error);
             this.logout();
@@ -137,18 +140,33 @@ class AdminDashboard {
     }
     
     async loadStats() {
-        // Simulate API call - replace with actual API endpoint
-        return {
-            totalReports: 0,
-            totalVehicles: 0,
-            totalDrivers: 0,
-            totalFuel: 0
-        };
+        try {
+            const response = await this.apiClient.getAdminStats();
+            return response || {
+                totalReports: 0,
+                totalVehicles: 0,
+                totalDrivers: 0,
+                totalFuel: 0
+            };
+        } catch (error) {
+            console.warn('Failed to load stats, using defaults:', error);
+            return {
+                totalReports: 0,
+                totalVehicles: 0,
+                totalDrivers: 0,
+                totalFuel: 0
+            };
+        }
     }
     
     async loadReports() {
-        // Simulate API call - replace with actual API endpoint
-        return [];
+        try {
+            const response = await this.apiClient.getReports();
+            return response?.reports || [];
+        } catch (error) {
+            console.warn('Failed to load reports, using empty array:', error);
+            return [];
+        }
     }
     
     updateStats(stats) {
@@ -638,9 +656,8 @@ class AdminDashboard {
     }
     
     logout() {
-        localStorage.removeItem('adminToken');
-        localStorage.removeItem('tokenExpiry');
-        localStorage.removeItem('adminUser');
+        localStorage.removeItem('eter_auth_token');
+        localStorage.removeItem('eter_user');
         window.location.href = './login.html';
     }
 }
