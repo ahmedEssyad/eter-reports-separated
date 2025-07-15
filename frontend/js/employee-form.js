@@ -32,16 +32,12 @@ class ETEREmployeeForm {
         // Reset button
         document.getElementById('resetBtn')?.addEventListener('click', () => this.resetForm());
         
-        // Add vehicle button
-        document.getElementById('addVehicleBtn')?.addEventListener('click', () => this.addVehicle());
+        // Vehicle table will handle its own events
     }
 
     initializeComponents() {
-        // Initialize vehicle table
-        this.vehicleTable = new VehicleTable('vehiclesTableBody');
-        
-        // Add initial vehicle row
-        this.addVehicle();
+        // Initialize vehicle table component
+        this.vehicleTable = new VehicleTable();
     }
 
     setDefaultValues() {
@@ -50,11 +46,7 @@ class ETEREmployeeForm {
         document.getElementById('date').value = today;
     }
 
-    addVehicle() {
-        if (this.vehicleTable) {
-            this.vehicleTable.addRow();
-        }
-    }
+    // Vehicle table component handles adding vehicles
 
     async handleSubmit(e) {
         e.preventDefault();
@@ -148,7 +140,7 @@ class ETEREmployeeForm {
             sortieGasoil: parseFloat(document.getElementById('sortieGasoil').value) || 0,
             debutIndex: parseFloat(document.getElementById('debutIndex').value) || 0,
             finIndex: parseFloat(document.getElementById('finIndex').value) || 0,
-            vehicles: this.vehicleTable.getVehicles(),
+            vehicles: this.vehicleTable.getVehiclesData(),
             ...signaturePad.getSignatures(),
             timestamp: new Date().toISOString()
         };

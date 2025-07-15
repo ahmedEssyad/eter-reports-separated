@@ -11,7 +11,7 @@ class VehicleTable {
     }
 
     init() {
-        this.tableBody = document.querySelector('#vehicleTableBody');
+        this.tableBody = document.querySelector('#vehiclesTableBody');
         if (!this.tableBody) {
             console.error('Vehicle table body not found');
             return;
