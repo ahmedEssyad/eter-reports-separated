@@ -1,0 +1,169 @@
+/* ================================
+   Signature Component
+   ================================ */
+
+.signature-container {
+  border: 2px solid var(--eter-gray);
+  border-radius: var(--radius-lg);
+  background: var(--eter-white);
+  overflow: hidden;
+  margin-bottom: var(--spacing-lg);
+}
+
+.signature-box {
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-lg);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  position: relative;
+}
+
+.signature-box:hover {
+  background-color: var(--eter-light);
+  border-color: var(--eter-primary);
+}
+
+.signature-box.has-signature {
+  padding: var(--spacing-sm);
+  cursor: default;
+}
+
+.signature-box.has-signature:hover {
+  background-color: var(--eter-white);
+}
+
+.signature-title {
+  font-weight: var(--font-weight-semibold);
+  color: var(--eter-dark);
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-md);
+}
+
+.signature-placeholder {
+  color: var(--eter-secondary);
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.signature-image {
+  max-width: 100%;
+  max-height: 100px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.signature-actions {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  display: none;
+}
+
+.signature-box.has-signature:hover .signature-actions {
+  display: block;
+}
+
+.signature-clear-btn {
+  background: var(--eter-danger);
+  color: var(--eter-white);
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.signature-clear-btn:hover {
+  background: var(--eter-danger-light);
+  transform: scale(1.1);
+}
+
+/* Signature Modal */
+.signature-modal .modal-content {
+  border-radius: var(--radius-lg);
+  border: none;
+  box-shadow: var(--shadow-xl);
+}
+
+.signature-modal .modal-header {
+  background: linear-gradient(135deg, var(--eter-primary), var(--eter-primary-dark));
+  color: var(--eter-white);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.signature-modal .modal-title {
+  font-weight: var(--font-weight-semibold);
+}
+
+.signature-canvas-container {
+  text-align: center;
+  padding: var(--spacing-lg);
+  background: var(--eter-light);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.signature-canvas {
+  border: 2px solid var(--eter-gray);
+  border-radius: var(--radius-md);
+  background: var(--eter-white);
+  cursor: crosshair;
+  box-shadow: var(--shadow-sm);
+  max-width: 100%;
+  height: auto;
+}
+
+.signature-canvas:hover {
+  border-color: var(--eter-primary);
+}
+
+.signature-modal-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  padding: var(--spacing-lg);
+}
+
+.signature-instructions {
+  text-align: center;
+  color: var(--eter-secondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+/* Touch Device Optimizations */
+@media (pointer: coarse) {
+  .signature-canvas {
+    cursor: default;
+  }
+  
+  .signature-box {
+    min-height: 140px;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .signature-modal .modal-dialog {
+    margin: var(--spacing-md);
+  }
+  
+  .signature-canvas-container {
+    padding: var(--spacing-md);
+  }
+  
+  .signature-modal-actions {
+    flex-direction: column;
+  }
+}

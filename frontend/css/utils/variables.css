@@ -1,0 +1,81 @@
+/* ================================
+   CSS Custom Properties (Variables)
+   ================================ */
+
+:root {
+  /* ETER Brand Colors */
+  --eter-primary: #1a56db;
+  --eter-primary-dark: #1e40af;
+  --eter-primary-light: #3b82f6;
+  
+  --eter-secondary: #6b7280;
+  --eter-secondary-dark: #4b5563;
+  --eter-secondary-light: #9ca3af;
+  
+  /* Status Colors */
+  --eter-success: #059669;
+  --eter-success-light: #10b981;
+  --eter-warning: #d97706;
+  --eter-warning-light: #f59e0b;
+  --eter-danger: #dc2626;
+  --eter-danger-light: #ef4444;
+  --eter-info: #2563eb;
+  --eter-info-light: #3b82f6;
+  
+  /* Neutral Colors */
+  --eter-white: #ffffff;
+  --eter-light: #f8fafc;
+  --eter-light-gray: #f1f5f9;
+  --eter-gray: #e2e8f0;
+  --eter-dark-gray: #94a3b8;
+  --eter-dark: #1f2937;
+  --eter-black: #0f172a;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;    /* 4px */
+  --spacing-sm: 0.5rem;     /* 8px */
+  --spacing-md: 1rem;       /* 16px */
+  --spacing-lg: 1.5rem;     /* 24px */
+  --spacing-xl: 2rem;       /* 32px */
+  --spacing-2xl: 3rem;      /* 48px */
+  
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.3s ease-in-out;
+  --transition-slow: 0.5s ease-in-out;
+  
+  /* Typography */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Z-index */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+}

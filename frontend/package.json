@@ -1,0 +1,16 @@
+{
+  "name": "eter-frontend",
+  "version": "1.0.0",
+  "description": "ETER Reports Frontend - Clean Bootstrap Architecture",
+  "scripts": {
+    "start": "live-server --port=3000 --host=0.0.0.0 --open=/pages/",
+    "dev": "live-server --port=3000 --host=0.0.0.0 --watch=. --open=/pages/",
+    "build": "echo 'Static files ready for deployment'",
+    "serve": "live-server --port=3000 --entry-file=pages/index.html"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "keywords": ["eter", "reports", "bootstrap", "frontend"],
+  "author": "ETER Development Team"
+}
