@@ -73,7 +73,7 @@ class SignaturePad {
         this.canvas = document.getElementById('signatureCanvas');
         if (!this.canvas) return;
 
-        this.ctx = this.canvas.getContext('2d');
+        this.ctx = this.canvas.getContext('2d', { willReadFrequently: true });
         
         // Set canvas size
         const rect = this.canvas.getBoundingClientRect();
