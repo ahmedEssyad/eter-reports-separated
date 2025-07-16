@@ -27,17 +27,24 @@ class AdminDashboard {
         const token = localStorage.getItem('eter_auth_token');
         
         if (!token) {
+            console.log('No token found, redirecting to login');
             window.location.href = './login.html';
             return;
         }
         
+        console.log('Token found, verifying...');
+        
         try {
-            const response = await this.apiClient.verifyToken();
-            if (response && response.success) {
+            const isValid = await this.apiClient.verifyToken();
+            console.log('Token verification result:', isValid);
+            
+            if (isValid) {
                 const userData = JSON.parse(localStorage.getItem('eter_user') || '{}');
+                console.log('User data:', userData);
                 document.getElementById('welcomeUser').textContent = `Bienvenue, ${userData.name || userData.username || 'Admin'}`;
             } else {
-                throw new Error('Token verification failed');
+                console.warn('Token verification failed, redirecting to login');
+                this.logout();
             }
         } catch (error) {
             console.error('Auth error:', error);

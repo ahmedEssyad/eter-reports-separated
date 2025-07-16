@@ -100,10 +100,10 @@ class ETERApiClient {
         
         try {
             const response = await this.request('/auth/verify');
-            return response.success;
+            return response && response.success;
         } catch (error) {
             console.warn('Token verification failed:', error);
-            this.logout();
+            // Don't auto-logout on verification failure - let the calling code handle it
             return false;
         }
     }
